@@ -59,10 +59,13 @@ fs.readFile('data/texts/Traumdeutung.txt', (err, data) => {
 });
 
 // route that computes concordances
-app.post('/api/getConcordances', (req, res) => {
+app.post('/api/getData', (req, res) => {
 
     let keyword = req.body.keyword;
     let selectedTextIDs = req.body.textIDs;
+
+    let author = 'authorPlaceholder'
+    let title = 'titlePlaceholder'
     // get info if stop words are included?
 
     // TODO
@@ -72,14 +75,17 @@ app.post('/api/getConcordances', (req, res) => {
     // generate concordances
 
     console.log('keyword', keyword);
-    console.log('starting...');
+    console.log('start computing...');
     let hits = nlpHelpers.computeHits(helperArrayOfStemmedTokens, keyword);
-    console.log(hits);
-    let concordances = nlpHelpers.makeConcordances(helperArrayOfStemmedTokens, hits, 7);
-    console.log(concordances);
-
+    let computed = nlpHelpers.makeConcordancesAndTopwords(author, title, helperArrayOfStemmedTokens, hits, 7);
+    let concordances = computed[0]
+    let topWords = computed[1]
+    //console.log(concordances);
+    console.log('finished');
+    console.log('hits:', hits.length)
+    console.log('topWords:', topWords)
     // send computed concordances to the client
-    res.json({'concordances': concordances});
+    res.json({'hits': hits.length, 'concordances': concordances, 'topWords': topWords});
 });
 
 
@@ -93,3 +99,4 @@ const port = process.env.PORT || 5000;
 app.listen(port);
 
 console.log(`server listening on port ${port}`);
+

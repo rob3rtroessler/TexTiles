@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row';
 
+// import other components
 import HealthGraph from "../visualizations/HealthGraph";
 
 class Tiles_MainBottom extends Component {

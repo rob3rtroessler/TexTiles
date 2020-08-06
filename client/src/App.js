@@ -5,8 +5,6 @@ import GridLayout from "react-grid-layout";
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 
-import 'semantic-ui-css/semantic.min.css'
-
 // bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
@@ -23,6 +21,12 @@ import Tiles_MainRight from "./tiles/Tiles_MainRight";
 
 import Tiles_MainBottom from "./tiles/Tiles_MainBottom";
 
+// Signed-in user context
+const ColorTable = React.createContext({
+    colors: ['#fb8072', '#8dd3c7','#ffffb3','#bebada','#80b1d3','#fdb462','#b3de69','#fccde5','#bc80bd','#ccebc5','#ffed6f'],
+    lockedWords:['', '','','','','','','','','','']
+});
+
 class App extends Component {
 
     constructor(props) {
@@ -35,10 +39,10 @@ class App extends Component {
 
             {i: 'left', x: 0, y: 3, w: 2, h: 19}, // text selection
             {i: 'center', x: 2, y: 3, w: 8, h: 10}, // center - three different views
-            {i: 'right', x: 10, y: 3, w: 2, h: 19}, // word list
+            {i: 'right', x: 10, y: 3, w: 2, h: 10}, // word list
 
 
-            {i: 'bottom', x: 2, y: 13, w: 8, h: 9}, // chart
+            {i: 'bottom', x: 2, y: 13, w: 10, h: 9}, // chart
         ];
 
         // init state
@@ -54,7 +58,7 @@ class App extends Component {
             // nlp
             keyword: null,
             textSelection : [],
-            concordances: []
+            data: []
 
         };
 
@@ -95,6 +99,7 @@ class App extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         console.log('component did update');
+        // if user searches for a new keyword or selected different texts
         if(prevState.keyword !== this.state.keyword || prevState.textSelection !== this.state.textSelection){
             console.log('fetching new data');
             this.getData(this.state.keyword, this.state.textSelection)
@@ -106,13 +111,13 @@ class App extends Component {
 
     render() {
         let app = this;
-        console.log('rendering home for the first time', this.state);
+        console.log('rendering App.js', this.state);
 
         return (
             <div className="App">
                 <Container fluid={true}>
-                    <Row style={{height: '100vh', background: '#e2e2e2', overflowY: 'scroll'}} id={'wrapper'}>
-                        <GridLayout className="layout" layout={app.state.layout} cols={12} rowHeight={33.2} width={this.state.appWidth}>
+                    <Row style={{height: '100vh', background: '#e2e2e2'}} id={'wrapper'}>
+                        <GridLayout className="layout" layout={app.state.layout} cols={12} rowHeight={32} width={this.state.appWidth}>
 
                             {/*DASHBOARD*/}
                             <div key="header-left" style={{background:'darkgrey', borderRadius: '5px', border: 'thin solid grey'}}>
@@ -134,12 +139,12 @@ class App extends Component {
 
                             {/* CENTER */}
                             <div key="center" className='home-card'>
-                                <Tiles_MainCenter displayed={this.state.displayed}/>
+                                <Tiles_MainCenter displayed={this.state.displayed} data={this.state.data}/>
                             </div>
 
                             {/* RIGHT */}
                             <div key="right" className='home-card'>
-                                <Tiles_MainRight selectWordParentCallback={this.selectWordParentCallback} displayed={this.state.displayed} concordances={this.state.concordances}/>
+                                <Tiles_MainRight selectWordParentCallback={this.selectWordParentCallback} displayed={this.state.displayed} data={this.state.data}/>
                             </div>
 
                             {/* BOTTOM */}
@@ -156,7 +161,7 @@ class App extends Component {
     // helper functions
     renderHome(state){
         // log
-        console.log('rendering home, state set to:', state);
+        console.log('rendering homeView, state set to:', state);
 
         this.setState({
             displayed: state,
@@ -165,7 +170,7 @@ class App extends Component {
     renderCorpus(state){
 
         // log
-        console.log('rendering journal, state set to:', state);
+        console.log('rendering corpusView, state set to:', state);
 
         // grid for corpus view
         let corpusLayout = [
@@ -190,7 +195,7 @@ class App extends Component {
     getData() {
         console.log(this.state.keyword);
         fetch(
-            `/api/getConcordances`,
+            `/api/getData`,
             {
                 method: 'POST',
                 headers: {
@@ -203,7 +208,7 @@ class App extends Component {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
-                this.setState({concordances: data.concordances})
+                this.setState({data: data})
             })
     }
 

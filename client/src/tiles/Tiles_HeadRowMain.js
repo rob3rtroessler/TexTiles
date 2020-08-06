@@ -45,6 +45,7 @@ class Tiles_HeadRowMain extends Component {
                         </form>
                     </div>
                 </Row>
+
             )
         }
     }

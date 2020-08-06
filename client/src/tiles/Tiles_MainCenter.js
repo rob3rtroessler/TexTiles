@@ -4,7 +4,10 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button'
+import HealthGraph from "../visualizations/HealthGraph";
 
+// import other components
+import ConcordanceVis from "../visualizations/ConcordanceVis.js"
 
 class Tiles_MainCenter extends Component {
 
@@ -21,17 +24,15 @@ class Tiles_MainCenter extends Component {
 
     componentDidMount() {
 
-
     }
 
     render() {
+        console.log('rendering concordanceView, check if data is available', this.props.concordances)
         return (
-            <Row style={{height: '100%', marginLeft: '0', marginRight: '0'}} className="justify-content-center">
-                <div onClick={this.getData} className="align-self-center">
+            <Row id='ConcordanceVisContainer' style={{height: '100%', marginLeft: '0', marginRight: '0'}}>
                     {this.props.displayed === 'home' &&
-                        <h1>TODO 2</h1>
+                        <ConcordanceVis data={this.props.data}/>
                     }
-                </div>
             </Row>
         );
     }

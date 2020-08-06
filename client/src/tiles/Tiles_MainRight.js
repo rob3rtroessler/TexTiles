@@ -4,9 +4,10 @@ import * as d3 from "d3";
 // bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row';
-
+import Col from "react-bootstrap/Col";
 // modules
 import WordList from "../visualizations/WordList";
+import TopWordsListItem from "../elements/TopWordsListItem"
 
 
 
@@ -27,78 +28,51 @@ class Tiles_MainRight extends Component {
 
     // life cycle - did mount
     componentDidMount() {
-        this.computeWords(this.props.concordances)
+        //this.computeWords(this.props.data)
     }
 
     // life cycle - did update
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('right side - props?', prevProps.concordances.length, this.props.concordances.length);
-
-        if (prevProps.concordances.length !== this.props.concordances.length){
-            console.log('props changed, computing new topWords');
-            this.computeWords(this.props.concordances, prevState.topWords);
-        } else {
-            console.log('props didnt changed, no need to compute topWords')
-        }
-        //
+        console.log('right side did update')
     }
 
-    // helper
-    computeWords(concordanceArrays){
-
-        let tmp = {};
-        concordanceArrays.forEach(array => {
-            array.forEach(word => {
-                if (!tmp[word]){
-                    tmp[word] = 1;
-                }
-                else {
-                    tmp[word] += 1;
-                }
-            })
-        });
-
-        // create array and sort
-        let items = Object.keys(tmp).map(function(key) {
-            return [key, tmp[key]];
-        });
-
-        // Sort the array based on the second element
-        items.sort(function(first, second) {
-            return second[1] - first[1];
-        });
-
-        // Create a new array with only the first 5 items
-        let tmpTwo = items.slice(0, 50);
-        let finalTopWords = [];
-        tmpTwo.forEach(element => {
-            let key = element[0];
-            let value = element[1];
-            finalTopWords.push({word: key, value:value})
-        });
-
-        // asd
-        console.log('finished computing topWords', finalTopWords);
-        this.setState({topWords: finalTopWords})
-    }
-
+    // color?
     selectWord(){
         console.log('fired', this.props);
         this.props.selectWordParentCallback(this.state.selectedWords)
     }
 
-    // when clicking on a word, add to array, change state and send info to parent
-
-
+    // rendering
     render() {
+        console.log('rendering wordList-Tiles, checking props', this.props.data.topWords);
 
-        console.log('rendering wordList-Tile');
-        return (
-            /* home - journal */
-            <Row style={{height: '100%', marginLeft: '0', marginRight: '0'}} className="justify-content-center">
-                <WordList topWords={this.state.topWords}/>
-            </Row>
-        );
+        if (this.props.displayed === 'home') {
+            return (
+                <Row style={{height: '100%', marginLeft: '0', marginRight: '0', overflowY: 'scroll'}} className="justify-content-center">
+
+                    {/*if Word environments have not been generated & topWords have not been computed, hint user*/}
+                    {this.props.data.length === 0 &&
+                    <div className="align-self-center">
+                        <h4 style={{textAlign: "center"}}>select texts and generate concordances before exploring</h4>
+                    </div>
+                    }
+
+                    {/*if Word environments & topWords have been computed, generate topWord list*/}
+                    {this.props.data.topWords &&
+                        <Col>
+                            {this.props.data.topWords.map((topWordsDict) =>
+                                <TopWordsListItem word={topWordsDict.word} value={topWordsDict.value}/>
+                            )}
+                        </Col>
+                    }
+                </Row>
+            )
+        }
+        else if (this.props.displayed !== 'home') {
+            return (
+                <div>s</div>
+            )
+        }
     }
 }
 
