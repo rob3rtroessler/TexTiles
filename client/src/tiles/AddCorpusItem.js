@@ -8,9 +8,8 @@ import Col from 'react-bootstrap/Col'
 // import other components
 import HealthGraph from "../visualizations/HealthGraph";
 import CorpusView from "./CorpusView"
-import AddCorpusItem from "./AddCorpusItem";
 
-class Tiles_MainBottom extends Component {
+class AddCorpusItem extends Component {
 
     constructor(props) {
         super(props);
@@ -22,21 +21,14 @@ class Tiles_MainBottom extends Component {
     }
 
     render() {
-        let displayed = this.props.displayed;
-
-        // HOME
-        if (displayed === 'home') {
-            return (
-                <HealthGraph/>
-            );
-        }
-        else if (displayed === 'corpusView') {
-            return (
-                <AddCorpusItem/>
-            );
-        }
-
+        return (
+            <Row>
+                <Col>
+                    <h4>Add Item</h4>
+                </Col>
+            </Row>
+        );
     }
 }
 
-export default Tiles_MainBottom;
+export default AddCorpusItem;

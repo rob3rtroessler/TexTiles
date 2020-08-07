@@ -179,11 +179,11 @@ class App extends Component {
             {i: 'header-right', x: 8, y: 0, w: 4, h: 3, static: true}, // handles
 
             {i: 'left', x: 0, y: 3, w: 2, h: 19}, // text selection
-            {i: 'center', x: 2, y: 3, w: 10, h: 19}, // center - three different views
+            {i: 'center', x: 2, y: 9, w: 10, h: 14}, // center - three different views
             {i: 'right', x: 0, y: 0, w: 0, h: 0, static: true}, // word list
 
 
-            {i: 'bottom', x: 0, y: 0, w: 0, h: 0, static: true}, // chart
+            {i: 'bottom', x: 4, y: 3, w: 10, h: 5}, // chart
         ];
 
         // set state

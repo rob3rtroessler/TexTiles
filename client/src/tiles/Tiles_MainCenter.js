@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 
 // bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button'
-import HealthGraph from "../visualizations/HealthGraph";
+import Row from 'react-bootstrap/Row'
 
 // import other components
 import ConcordanceVis from "../visualizations/ConcordanceVis.js"
+import CorpusView from "./CorpusView";
 
 class Tiles_MainCenter extends Component {
 
@@ -28,13 +27,25 @@ class Tiles_MainCenter extends Component {
 
     render() {
         console.log('rendering concordanceView, check if data is available', this.props.concordances)
-        return (
-            <Row id='ConcordanceVisContainer' style={{height: '100%', marginLeft: '0', marginRight: '0'}}>
+        let displayed = this.props.displayed;
+
+        // HOME
+        if (displayed === 'home') {
+            return (
+                <Row id='ConcordanceVisContainer' style={{height: '100%', marginLeft: '0', marginRight: '0'}}>
                     {this.props.displayed === 'home' &&
-                        <ConcordanceVis data={this.props.data}/>
+                    <ConcordanceVis data={this.props.data}/>
                     }
-            </Row>
-        );
+                </Row>
+            );
+        }
+
+        // CorpusView
+        else if ( displayed === 'corpusView'){
+            return(
+                <CorpusView/>
+            )
+        }
     }
 }
 

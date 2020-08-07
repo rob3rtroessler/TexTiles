@@ -70,6 +70,11 @@ class ConconrdanceVis extends Component {
             .style("left", "0px")
             .style("top", "0px");
 
+        // call updateVis if concordances are already available
+        if (this.props.data.concordances) {
+            this.updateVis();
+        }
+
     }
 
     updateVis(){

@@ -47,7 +47,7 @@ class Tiles_MainLeft extends Component {
         let title = 'titlePlaceholder';
 
         // there should be a list of all the selected texts. This info should be passed to this component. Then I can iterate over that list to create
-        if (displayed === 'home'){
+        if (displayed === 'home' || displayed === 'corpusView'){
             return (
             <Row style={{height: '100%', marginLeft: '0', marginRight: '0'}}>
                     <Container>
