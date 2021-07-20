@@ -138,25 +138,25 @@ class App extends Component {
                                 <Tiles_HeadRowRight displayed={this.state.displayed} renderHome={this.renderHome}/>
                             </div>
 
-                            {/* LEFT */}
-                            <div key="left" className='home-card'>
-                                <Tiles_MainLeft displayed={this.state.displayed} renderCorpus={this.renderCorpus}/>
-                            </div>
+                            {/*/!* LEFT *!/*/}
+                            {/*<div key="left" className='home-card'>*/}
+                            {/*    <Tiles_MainLeft displayed={this.state.displayed} renderCorpus={this.renderCorpus}/>*/}
+                            {/*</div>*/}
 
-                            {/* CENTER */}
-                            <div key="center" className='home-card'>
-                                <Tiles_MainCenter selectedTextsCallback={this.selectedTextsCallback} displayed={this.state.displayed} data={this.state.data}/>
-                            </div>
+                            {/*/!* CENTER *!/*/}
+                            {/*<div key="center" className='home-card'>*/}
+                            {/*    <Tiles_MainCenter selectedTextsCallback={this.selectedTextsCallback} displayed={this.state.displayed} data={this.state.data}/>*/}
+                            {/*</div>*/}
 
-                            {/* RIGHT */}
-                            <div key="right" className='home-card'>
-                                <Tiles_MainRight selectWordParentCallback={this.selectWordParentCallback} displayed={this.state.displayed} data={this.state.data}/>
-                            </div>
+                            {/*/!* RIGHT *!/*/}
+                            {/*<div key="right" className='home-card'>*/}
+                            {/*    <Tiles_MainRight selectWordParentCallback={this.selectWordParentCallback} displayed={this.state.displayed} data={this.state.data}/>*/}
+                            {/*</div>*/}
 
-                            {/* BOTTOM */}
-                            <div key="bottom" style={{borderRadius: '5px', border: 'thin solid grey'}}>
-                                <Tiles_MainBottom displayed={this.state.displayed}/>
-                            </div>
+                            {/*/!* BOTTOM *!/*/}
+                            {/*<div key="bottom" style={{borderRadius: '5px', border: 'thin solid grey'}}>*/}
+                            {/*    <Tiles_MainBottom displayed={this.state.displayed}/>*/}
+                            {/*</div>*/}
                         </GridLayout>
                     </Row>
                 </Container>
@@ -199,6 +199,7 @@ class App extends Component {
     }
 
     getData() {
+        console.log('getting data')
         console.log(this.state.keyword);
         fetch(
             `/api/getData`,
