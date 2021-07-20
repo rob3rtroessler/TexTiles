@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// semantic ui
+import 'semantic-ui-css/semantic.min.css'
+
 // react grid
 import GridLayout from "react-grid-layout";
 import 'react-grid-layout/css/styles.css';
@@ -57,9 +60,11 @@ class App extends Component {
 
             // nlp
             keyword: null,
-            textSelection : [],
+            selectedTexts : [
+                {id: 1, author: 'Sigmund Freud', title: 'Die Taumdeutung'},
+                {id: 2, author: 'Wilhelm Wundt', title: 'Physiologishce Psychologie'},
+            ],
             data: []
-
         };
 
         // bind other click events
@@ -68,6 +73,7 @@ class App extends Component {
 
         // bind callbacks
         this.selectWordParentCallback = this.selectWordParentCallback.bind(this);
+        this.selectedTextsCallback = this.selectedTextsCallback(this);
         this.searchKeywordParentCallback = this.searchKeywordParentCallback.bind(this);
     }
 
@@ -139,7 +145,7 @@ class App extends Component {
 
                             {/* CENTER */}
                             <div key="center" className='home-card'>
-                                <Tiles_MainCenter displayed={this.state.displayed} data={this.state.data}/>
+                                <Tiles_MainCenter selectedTextsCallback={this.selectedTextsCallback} displayed={this.state.displayed} data={this.state.data}/>
                             </div>
 
                             {/* RIGHT */}
@@ -183,7 +189,7 @@ class App extends Component {
             {i: 'right', x: 0, y: 0, w: 0, h: 0, static: true}, // word list
 
 
-            {i: 'bottom', x: 4, y: 3, w: 10, h: 5}, // chart
+            {i: 'bottom', x: 4, y: 3, w: 10, h: 5, static: true}, // chart
         ];
 
         // set state
@@ -218,6 +224,13 @@ class App extends Component {
         // set state -> whenever component updates, it will check if keywords or text selection have changed -> new fetch
         this.setState({keyword: keyword});
     }
+
+    selectedTextsCallback(selectedTextsDict){
+
+        //
+        this.setState({selectedTexts: selectedTextsDict});
+    }
+
     selectWordParentCallback(selection){
 
     }

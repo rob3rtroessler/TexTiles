@@ -1,53 +1,40 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import DeleteIcon from '@material-ui/icons/Delete';
-import NotInterestedIcon from '@material-ui/icons/NotInterested';
+import Switch from '@material-ui/core/Switch';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        background: 'lightgrey',
-        border: 'thin solid grey',
-        margin: 10
-    },
-    media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
-    }
-}));
+
+// bootstrap
+import Row from 'react-bootstrap/row'
+import Col from 'react-bootstrap/Col'
+
 
 export default function CorpusItem() {
-    const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
+    const [state, setState] = React.useState({
+        checkedA: true,
+        checkedB: true,
+    });
 
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
+    const [checked, setChecked] = React.useState(false);
+
+    const toggleChecked = () => {
+        setChecked((prev) => !prev);
+    };
+
+    const handleChange = (event) => {
+        console.log('test', event.target.name)
+        setState({ ...state, [event.target.name]: event.target.checked });
     };
 
     return (
-        <Card className={classes.root}>
-            <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    This impressive paella is a perfect party dish and a fun meal to cook together with your
-                    guests. Add 1 cup of frozen peas along with the mussels, if you like.
-                </Typography>
-            </CardContent>
-            <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                </IconButton>
-                <IconButton aria-label="share">
-                    <NotInterestedIcon/>
-                </IconButton>
-                <IconButton aria-label="share">
-                    <DeleteIcon/>
-                </IconButton>
-            </CardActions>
-        </Card>
+
+                <FormGroup>
+                    <FormControlLabel
+                        control={<Switch checked={checked} onChange={toggleChecked} />}
+                        label="Normal"
+                    />
+                </FormGroup>
+
     );
 }

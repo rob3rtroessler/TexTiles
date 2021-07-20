@@ -14,12 +14,14 @@ class Tiles_MainCenter extends Component {
         super(props);
 
         this.state = {
-            displayed: this.props.displayed
+            displayed: this.props.displayed,
+            selectedTexts: {}
         };
 
+        // bind callbacks
+        this.corpusHasUpdatedCallback = this.corpusHasUpdatedCallback.bind(this);
+
     }
-
-
 
     componentDidMount() {
 
@@ -43,9 +45,25 @@ class Tiles_MainCenter extends Component {
         // CorpusView
         else if ( displayed === 'corpusView'){
             return(
-                <CorpusView/>
+                <CorpusView corpusHasUpdatedCallback={this.corpusHasUpdatedCallback}/>
             )
         }
+    }
+
+    updateTextSelection(){
+        let selection = this.state.selectedTexts
+        console.log('updating selection', selection);
+        this.props.selectedTextsCallback(selection)
+    }
+
+    corpusHasUpdatedCallback(dict){
+        console.log('callback has sent data to Tiles_MainCenter, call updateTextSelection', dict)
+        this.updateTextSelection(dict)
+    }
+    textHasUpdatedCallback(textID, status){
+        console.log(textID, status)
+        // update selectedTexts
+        //this.setState({selectedTexts: callback})
     }
 }
 

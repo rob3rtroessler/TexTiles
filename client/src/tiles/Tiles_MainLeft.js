@@ -1,17 +1,36 @@
 import React, { Component } from 'react';
 
-// bootstrap
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row';
-import Col from  'react-bootstrap/Col'
 
-// semantic ui
-import {Checkbox} from "semantic-ui-react";
-import 'semantic-ui-css/semantic.min.css'
+// material-ui
+import ListedCorpusItem from "../elements/ListedCorpusItem";
+import { withStyles } from "@material-ui/core/styles";
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
-// d3
-import * as d3 from "d3";
+// icons
+import EditIcon from '@material-ui/icons/Edit';
+import IconButton from "@material-ui/core/IconButton";
+
+
+const styles = ({
+    root: {
+        height: '100%',
+        marginLeft: '0',
+        marginRight: '0'
+    },
+    alignItemsAndJustifyContent: {
+        height: '7vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'grey',
+        marginBottom: 'thin solid grey'
+    },
+    corpusItem: {
+        borderBottom: 'thin solid grey',
+        paddingLeft: '8%'
+    }
+});
 
 
 class Tiles_MainLeft extends Component {
@@ -37,113 +56,42 @@ class Tiles_MainLeft extends Component {
     }
 
     hoverFunction(){
-        console.log('halle')
-        d3.selectAll('.book').attr('fill', 'blue')
     }
 
     render() {
+
+        const { classes } = this.props;
         let displayed = this.props.displayed;
         let author = 'authorPlaceholder';
         let title = 'titlePlaceholder';
 
+        let list = [1,2,3,4,5,6,7]
+
         // there should be a list of all the selected texts. This info should be passed to this component. Then I can iterate over that list to create
         if (displayed === 'home' || displayed === 'corpusView'){
             return (
-            <Row style={{height: '100%', marginLeft: '0', marginRight: '0'}}>
-                    <Container>
-                        <h1>Selected Texts</h1>
-                        <button onClick={this.renderCorpus}>edit</button>
-                        <Row style={{'borderTop':'thin solid grey', 'height': '10%'}}>
-                            <Col xs={3}>
-                                <Row className="justify-content-center" style={{'height':'100%'}}>
-                                    <Checkbox toggle className="align-self-center"/>
-                                </Row>
-                            </Col>
-                            <Col xs={9}>
-                                <Row className="justify-content-center" style={{'height':'100%'}}>
-                                    <p toggle className="align-self-center" onMouseEnter={() => this.hoverFunction()} >{author}: {title}</p>
-                                </Row>
-                            </Col>
-                        </Row>
-                        <Row style={{'borderTop':'thin solid grey', 'height': '10%'}}>
-                            <Col xs={3}>
-                                <Row className="justify-content-center" style={{'height':'100%'}}>
-                                    <Checkbox toggle className="align-self-center"/>
-                                </Row>
-                            </Col>
-                            <Col xs={9}>
-                                <Row className="justify-content-center" style={{'height':'100%'}}>
-                                    <p toggle className="align-self-center">{author}: {title}</p>
-                                </Row>
-                            </Col>
-                        </Row>
-                        <Row style={{'borderTop':'thin solid grey', 'height': '10%'}}>
-                            <Col xs={3}>
-                                <Row className="justify-content-center" style={{'height':'100%'}}>
-                                    <Checkbox toggle className="align-self-center"/>
-                                </Row>
-                            </Col>
-                            <Col xs={9}>
-                                <Row className="justify-content-center" style={{'height':'100%'}}>
-                                    <p toggle className="align-self-center">{author}: {title}</p>
-                                </Row>
-                            </Col>
-                        </Row>
-                        <Row style={{'borderTop':'thin solid grey', 'height': '10%'}}>
-                            <Col xs={3}>
-                                <Row className="justify-content-center" style={{'height':'100%'}}>
-                                    <Checkbox toggle className="align-self-center"/>
-                                </Row>
-                            </Col>
-                            <Col xs={9}>
-                                <Row className="justify-content-center" style={{'height':'100%'}}>
-                                    <p toggle className="align-self-center">{author}: {title}</p>
-                                </Row>
-                            </Col>
-                        </Row>
-                        <Row style={{'borderTop':'thin solid grey', 'height': '10%'}}>
-                            <Col xs={3}>
-                                <Row className="justify-content-center" style={{'height':'100%'}}>
-                                    <Checkbox toggle className="align-self-center"/>
-                                </Row>
-                            </Col>
-                            <Col xs={9}>
-                                <Row className="justify-content-center" style={{'height':'100%'}}>
-                                    <p toggle className="align-self-center">{author}: {title}</p>
-                                </Row>
-                            </Col>
-                        </Row>
-                        <Row style={{'borderTop':'thin solid grey', 'height': '10%'}}>
-                            <Col xs={3}>
-                                <Row className="justify-content-center" style={{'height':'100%'}}>
-                                    <Checkbox toggle className="align-self-center"/>
-                                </Row>
-                            </Col>
-                            <Col xs={9}>
-                                <Row className="justify-content-center" style={{'height':'100%'}}>
-                                    <p toggle className="align-self-center">{author}: {title}</p>
-                                </Row>
-                            </Col>
-                        </Row>
-
-                        {/*there should be a an add button to */}
-
-
-                    </Container>
-
-
-                </Row>
+                <Grid>
+                    <Grid container className={classes.alignItemsAndJustifyContent}>
+                        <Grid item>
+                            <h1>Corpus</h1>
+                        </Grid>
+                        <Grid item>
+                            <IconButton aria-label="share" onClick={this.renderCorpus}>
+                                <EditIcon/>
+                            </IconButton>
+                        </Grid>
+                    </Grid>
+                    <Grid container>
+                        {list.map((element) =>
+                            <Grid item xs={12} className={classes.corpusItem}>
+                                <ListedCorpusItem data={element}/>
+                            </Grid>
+                        )}
+                    </Grid>
+                </Grid>
             );
-        } else {
-            return (
-                <Row style={{height: '100%', marginLeft: '0', marginRight: '0'}} className="justify-content-center">
-                    <div className="align-self-center">
-                        <h1>Sth else</h1>
-                    </div>
-                </Row>
-            )
         }
     }
 }
 
-export default Tiles_MainLeft;
+export default withStyles(styles)(Tiles_MainLeft);

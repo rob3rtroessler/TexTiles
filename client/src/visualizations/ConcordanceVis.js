@@ -9,7 +9,7 @@ import Row from 'react-bootstrap/Row';
 import Col from'react-bootstrap/Col'
 
 
-class ConconrdanceVis extends Component {
+class ConcordanceVis extends Component {
 
     constructor(props) {
         super(props);
@@ -159,4 +159,4 @@ class ConconrdanceVis extends Component {
     }
 }
 
-export default ConconrdanceVis;
+export default ConcordanceVis;
