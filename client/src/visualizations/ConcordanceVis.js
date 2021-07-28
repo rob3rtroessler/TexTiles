@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect,useRef } from 'react';
 
 // d3
 import * as d3 from "d3";
@@ -8,6 +8,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row';
 import Col from'react-bootstrap/Col'
 
+
+// dealing with height etc.
+// https://stackoverflow.com/questions/43817118/how-to-get-the-width-of-a-react-element/56011277
 
 class ConcordanceVis extends Component {
 
@@ -20,23 +23,32 @@ class ConcordanceVis extends Component {
 
     }
 
+
+
     componentDidMount() {
-        console.log('Concordance Vis did mount, initializing');
+
+        console.log('Concordance Vis did mount, initializing svg without having any proper height and width; all important vis data will be stored in the state');
         this.initVis();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('Concordance Vis is updating...');
+        console.log('Concordance Vis did update, call updateVis()', prevProps, this.props);
+
+        // if data has been loaded/requested, call update vis
         if (this.props.data.concordances){
             this.updateVis();
-
-            // overflow
-            if (this.props.data.concordances.length > 10){
-                console.log(document.getElementById('concordanceSVG').style);
-                document.getElementById('concordanceSVG').setAttribute('height', this.props.data.concordances.length * 20 + 100)
-                document.getElementById('ConcordanceVisContainer').style.overflowY = 'scroll'
-            }
         }
+
+
+        // if (this.props.data.concordances){
+        //
+        //     if(prevProps.dimensions.height === this.props.dimensions.height && prevProps.dimensions.width === this.props.dimensions.width){
+        //         console.log('dimensions are the same')
+        //     }
+        //     else{
+        //         console.log('dimensions have changed')
+        //     }
+        // }
 
 
         //
@@ -50,17 +62,19 @@ class ConcordanceVis extends Component {
 
         // 2. Use the margin convention practice
         vis.margin = {top: 50, right: 20, bottom: 50, left: 20};
-        vis.width = 800 - vis.margin.left - vis.margin.right; // Use the window's width
+        vis.width = this.props.dimensions.width - vis.margin.left - vis.margin.right; // Use the window's width
         vis.height = 400 - vis.margin.top - vis.margin.bottom;
         vis.rowHeight = 20;
+
+        console.log('initVis with following width', this.props.dimensions.width)
 
         // append SVG drawing area
         vis.svg = d3.select("#concordanceVis").append("svg")
             .attr('id', 'concordanceSVG')
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
-            .append("g")
-            .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+            // .append("g")
+            // .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
         // append tooltip div
         vis.tooltipDiv = d3.select("#concordanceVis").append("div")
@@ -70,15 +84,29 @@ class ConcordanceVis extends Component {
             .style("left", "0px")
             .style("top", "0px");
 
-        // call updateVis if concordances are already available
-        if (this.props.data.concordances) {
-            this.updateVis();
-        }
 
     }
 
     updateVis(){
         let vis = this.state.vis;
+
+        console.log('in update', this.props.dimensions)
+
+        vis.svg
+            .attr("width", this.props.dimensions.width + vis.margin.left + vis.margin.right)
+            .attr("height", this.props.dimensions.height + vis.margin.top + vis.margin.bottom)
+    }
+
+    updateVis2(){
+        let vis = this.state.vis;
+
+        console.log('in updateVis', this.props.dimensions)
+        // before we (re)draw any elements, update height and width
+
+        d3.select("#concordanceSVG")
+            .attr("width", this.props.dimensions.width + vis.margin.left + vis.margin.right)
+            .attr("height", this.props.dimensions.height + vis.margin.top + vis.margin.bottom)
+
         let texTileWidth = (vis.width - 14*3)/15
 
         // error checking
@@ -123,30 +151,33 @@ class ConcordanceVis extends Component {
 
             // draw rectangles
             rectangles.enter().append("rect")
-                .attr("class", function (d){return `${d} ${row.bookID}`}) // in order to highlight words, use classname=word; also, assign parent book to every word
+                .attr("class", function (d){return `tile word_class_${d} ${row.bookID}`}) // in order to highlight words, use classname=word; also, assign parent book to every word
                 .attr("width", texTileWidth)
                 .attr("height", 12)
                 .attr("x", function (d, i) { return (i * texTileWidth*5/4) })
                 .attr('fill', 'lightgrey')
-                .on('mouseover', function(d, i){
+                .on('mouseover', function(event, d){
+
+                    // first, highlight tile
+                    d3.select(this)
+                        .style('fill', 'red')
 
                     // display tooltip
                     vis.tooltipDiv
-                        .transition()
-                        .duration(200)
                         .style("opacity", 0.88);
 
                     // position tooltip
                     vis.tooltipDiv
                         .html(html)
-                        .style("left", 300)
-                        .style("top", (d3.event.pageY +10) + "px")
+                        .style("left", 0 + 'px')
+                        .style("top", (event.offsetY) + 10 + "px")
                 })
                 .on('mouseout', function(d){
                     // tooltip
-                    vis.tooltipDiv.transition()
-                        .duration(500)
-                        .style("opacity", 0);
+                    vis.tooltipDiv
+                        .style("opacity", 0)
+                        .style("left", 0 + 'px')
+                        .style("top", 0 + "px")
                 })
         })
     }

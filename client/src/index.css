@@ -82,3 +82,11 @@ code {
   background: #979797;
   cursor: pointer;
 }
+
+
+.tile {
+}
+
+.tile:hover {
+  cursor: pointer
+}

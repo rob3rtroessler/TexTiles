@@ -5,8 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row'
 
 // import other components
-import ConcordanceVis from "../visualizations/ConcordanceVis.js"
+import ConcordanceVisContainer from "../visualizations/ConcordanceVisContainer.js"
 import CorpusView from "./CorpusView";
+import BarChart from '../visualizations/BarChart'
+
 
 class Tiles_MainCenter extends Component {
 
@@ -28,26 +30,25 @@ class Tiles_MainCenter extends Component {
     }
 
     render() {
-        console.log('rendering concordanceView, check if data is available', this.props.concordances)
-        let displayed = this.props.displayed;
+        console.log('rendering concordanceView, check if data is available', this.props.data)
+        if(this.props.data === undefined){
+            return(
+                <div>no data</div>
+            )
+        }
 
         // HOME
-        if (displayed === 'home') {
+        else {
+            console.log('in else')
             return (
-                <Row id='ConcordanceVisContainer' style={{height: '100%', marginLeft: '0', marginRight: '0'}}>
+                <Row id='ConcordanceVisContainer' style={{height: '100%', width: '100%', marginLeft: '0', marginRight: '0'}}>
                     {this.props.displayed === 'home' &&
-                    <ConcordanceVis data={this.props.data}/>
+                        <ConcordanceVisContainer data={this.props.data}/>
                     }
                 </Row>
             );
         }
 
-        // CorpusView
-        else if ( displayed === 'corpusView'){
-            return(
-                <CorpusView corpusHasUpdatedCallback={this.corpusHasUpdatedCallback}/>
-            )
-        }
     }
 
     updateTextSelection(){

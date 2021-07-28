@@ -82,8 +82,8 @@ class Tiles_MainLeft extends Component {
                         </Grid>
                     </Grid>
                     <Grid container>
-                        {list.map((element) =>
-                            <Grid item xs={12} className={classes.corpusItem}>
+                        {list.map((element, index) =>
+                            <Grid key={'corpus_list_item_' + index} item xs={12} className={classes.corpusItem}>
                                 <ListedCorpusItem data={element}/>
                             </Grid>
                         )}

@@ -8,6 +8,8 @@ import GridLayout from "react-grid-layout";
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 
+
+
 // bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
@@ -23,6 +25,17 @@ import Tiles_MainCenter from "./tiles/Tiles_MainCenter";
 import Tiles_MainRight from "./tiles/Tiles_MainRight";
 
 import Tiles_MainBottom from "./tiles/Tiles_MainBottom";
+
+// testing measuring
+import withMeasure from "./hocs/withMeasure";
+
+import DemoBarChart from "./components/DemoBarChart";
+
+
+const dimensions = ["width", "height"];
+const MeasuredDemoBarChart = withMeasure(dimensions)(DemoBarChart);
+
+console.log(MeasuredDemoBarChart)
 
 // Signed-in user context
 const ColorTable = React.createContext({
@@ -123,7 +136,7 @@ class App extends Component {
             <div className="App">
                 <Container fluid={true}>
                     <Row style={{height: '100vh', background: '#e2e2e2'}} id={'wrapper'}>
-                        <GridLayout className="layout" layout={app.state.layout} cols={12} rowHeight={32} width={this.state.appWidth}>
+                        <GridLayout className="layout" layout={app.state.layout} cols={12} rowHeight={32} width={this.state.appWidth} height={this.state.appHeight}>
 
                             {/*DASHBOARD*/}
                             <div key="header-left" style={{background:'darkgrey', borderRadius: '5px', border: 'thin solid grey'}}>
@@ -138,15 +151,15 @@ class App extends Component {
                                 <Tiles_HeadRowRight displayed={this.state.displayed} renderHome={this.renderHome}/>
                             </div>
 
-                            {/*/!* LEFT *!/*/}
-                            {/*<div key="left" className='home-card'>*/}
-                            {/*    <Tiles_MainLeft displayed={this.state.displayed} renderCorpus={this.renderCorpus}/>*/}
-                            {/*</div>*/}
+                            {/* LEFT */}
+                            <div key="left" className='home-card'>
+                                <Tiles_MainLeft displayed={this.state.displayed} renderCorpus={this.renderCorpus}/>
+                            </div>
 
-                            {/*/!* CENTER *!/*/}
-                            {/*<div key="center" className='home-card'>*/}
-                            {/*    <Tiles_MainCenter selectedTextsCallback={this.selectedTextsCallback} displayed={this.state.displayed} data={this.state.data}/>*/}
-                            {/*</div>*/}
+                            {/* CENTER */}
+                            <div key="center" className='home-card'>
+                                <Tiles_MainCenter selectedTextsCallback={this.selectedTextsCallback} displayed={this.state.displayed} data={this.state.data}/>
+                            </div>
 
                             {/*/!* RIGHT *!/*/}
                             {/*<div key="right" className='home-card'>*/}
