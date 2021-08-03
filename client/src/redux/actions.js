@@ -6,7 +6,7 @@ import {
   SET_COLOR,
   INCREMENT_RENDER_COUNT,
   SELECT_THEME,
-  CONCORDANCE_DATA
+  UPDATE_CONCORDANCE_DATA
 } from "./constants";
 
 export const newText = text => ({
@@ -15,7 +15,7 @@ export const newText = text => ({
 });
 
 export const newFetch = data => ({
-  type: CONCORDANCE_DATA,
+  type: UPDATE_CONCORDANCE_DATA,
   data
 })
 

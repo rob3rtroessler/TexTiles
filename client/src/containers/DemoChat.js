@@ -24,7 +24,6 @@ const mapStateToProps = (state, ownProps) => ({
   users: getUsers(state),
   texts: getTexts(state),
   colors: getSaturatedColorsArray(state),
-  data: getTexts(state)
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -37,9 +36,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     );
 
   },
-  // updateText(text) {
-  //   dispatch(newText(text));
-  // },
   incrementRenderCount(mode) {
     dispatch(incrementRenderCount("chat", mode));
   },

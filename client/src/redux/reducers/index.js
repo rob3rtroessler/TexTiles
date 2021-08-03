@@ -5,6 +5,7 @@ import colors from './colors'
 import hover from './hover'
 
 import renderCount from './renderCount'
+import fetchedData from './fetches'
 
 export const initialState = fromJS({
   text: {},
@@ -13,11 +14,12 @@ export const initialState = fromJS({
     user2: 'orange'
   },
   hover: null,
-  renderCount: {}
+  renderCount: {},
+  fetchedData: {}
 })
 
 const rootReducer = combineReducers(
-  {text, colors, hover, renderCount},
+  {text, colors, hover, renderCount, fetchedData},
   initialState
 )
 
