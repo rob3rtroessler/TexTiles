@@ -1,18 +1,12 @@
-/*body {*/
-/*  margin: 0;*/
-/*  overflow-y: hidden;*/
-/*  overflow-x: hidden;*/
-/*  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',*/
-/*    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',*/
-/*    sans-serif;*/
-/*  -webkit-font-smoothing: antialiased;*/
-/*  -moz-osx-font-smoothing: grayscale;*/
-/*}*/
-
 body {
-  background: white;
   margin: 0;
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
@@ -20,10 +14,6 @@ code {
     monospace;
 }
 
-h1 {
-  text-align: center;
-  margin: 0;
-}
 
 .home-card, .all-card {
   border: thin solid grey;
