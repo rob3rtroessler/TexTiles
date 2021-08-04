@@ -15,7 +15,7 @@ export const initialState = fromJS({
   },
   hover: null,
   renderCount: {},
-  fetchedData: {}
+  fetchedData: []
 })
 
 const rootReducer = combineReducers(

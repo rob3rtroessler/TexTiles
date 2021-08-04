@@ -16,7 +16,9 @@ export const getUsers = state => fromText.getUsers(state.get('text'))
 export const getTexts = state => fromText.getTexts(state.get('text'))
 
 // fetch data
-export const getFetchedData = state => fromFetched.getFetchedData(state.get('fetched'))
+export const getFetchedData = state => fromFetched.getFetchedData(state.get('fetchedData'))
+//export const fetchData = state => fromFetched.fetchData(state.get('fetchedData'))
+
 
 // theme
 export const getTheme = state => fromTheme.getTheme(state.get('theme'))

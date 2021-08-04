@@ -59,7 +59,7 @@ class Dashboard extends React.Component {
               {i: 'header-right', x: 8, y: 0, w: 4, h: 1, static: true}, // handles
 
               // FULL
-              {i: 'FL', x: 0, y: 1, w: 2, h: 10.35, static: true},
+              {i: 'FL', x: 0, y: 1, w: 2, h: 10, static: true},
               {i: 'FR', x: 11, y: 1, w: 2, h: 5, static: true}, // logo & heading
 
               // TOP
@@ -67,9 +67,9 @@ class Dashboard extends React.Component {
               { i: "TR", x: 6, y: 2, w: 4, h: 5 },
 
               // BOTTOM
-              { i: "BL", x: 2, y: 3, w: 3, h: 5.35 },
-              { i: "BC", x: 5, y: 3, w: 3, h: 5.35 },
-              { i: "BR", x: 8, y: 3, w: 4, h: 5.35 }]
+              { i: "BL", x: 2, y: 3, w: 3, h: 5 },
+              { i: "BC", x: 5, y: 3, w: 3, h: 5 },
+              { i: "BR", x: 8, y: 3, w: 4, h: 5 }]
       };
   }
 

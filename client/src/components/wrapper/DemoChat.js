@@ -12,7 +12,7 @@ class DemoChat extends React.Component {
   componentDidMount() {
     this.props.incrementRenderCount("component");
     this.props.generateText();
-    //this.props.fetchData();
+    this.props.fetchData();
 
   }
 

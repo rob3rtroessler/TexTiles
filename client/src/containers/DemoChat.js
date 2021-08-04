@@ -10,7 +10,7 @@ import {
   getUsers,
   getTexts,
   getSaturatedColorsArray,
-  //getFetchedData
+  getFetchedData
 } from "../redux/selectors";
 
 const loremOption = {
@@ -20,11 +20,17 @@ const loremOption = {
 
 
 
-const mapStateToProps = (state, ownProps) => ({
-  users: getUsers(state),
-  texts: getTexts(state),
-  colors: getSaturatedColorsArray(state),
-});
+const mapStateToProps = (state, ownProps) => {
+  // console.log('map state', state)
+  return {
+    users: getUsers(state),
+    texts: getTexts(state),
+    colors: getSaturatedColorsArray(state),
+    fetchedData: getFetchedData(state)
+  }
+}
+
+
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   generateText() {
@@ -42,7 +48,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchData(){
     console.log('in fetchData')
     dispatch(newFetch({
-      fetchedData: 'dummy'
+      fetchedData: [{},{},{}]
     }));
   }
 
