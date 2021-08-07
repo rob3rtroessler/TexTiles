@@ -48,7 +48,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchData(){
     console.log('in fetchData')
     dispatch(newFetch({
-      fetchedData: [{},{},{}]
+      fetchedData: 'gut'
     }));
   }
 

@@ -21,6 +21,9 @@ import DemoPieChart from "../containers/DemoPieChart";
 import DemoScatterPlot from "../containers/DemoScatterPlot";
 import DemoChat from "../containers/DemoChat";
 
+// containers - new
+import LineChartContainer from "../containers/LineChartContainer"
+
 // prop types
 import PropTypes from "prop-types";
 const { string, object, func, arrayOf } = PropTypes;
@@ -36,8 +39,9 @@ const MeasuredDemoConcordanceVis = withMeasure(dimensions)(DemoConcordanceVis);
 
 const MeasuredDemoBarChart = withMeasure(dimensions)(DemoBarChart);
 const MeasuredDemoScatterPlot = withMeasure(dimensions)(DemoScatterPlot);
-const MeasuredDemoPieChart = withMeasure(dimensions)(DemoPieChart);
+// const MeasuredDemoPieChart = withMeasure(dimensions)(DemoPieChart);
 const MeasuredDemoChat = withMeasure(dimensions)(DemoChat);
+const MeasuredLineChartContainer = withMeasure(dimensions)(LineChartContainer)
 
 // CSS
 import "react-grid-layout/css/styles.css";
@@ -144,7 +148,7 @@ class Dashboard extends React.Component {
 
               {/*BOTTOM*/}
               <div key="BL" style={{background:'darkgrey', borderRadius: '5px', border: 'thin solid grey'}}>
-                  <MeasuredDemoPieChart />
+                  <MeasuredLineChartContainer />
               </div>
               <div key="BC" className='home-card'>
                   <MeasuredDemoScatterPlot />

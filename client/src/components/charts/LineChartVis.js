@@ -33,8 +33,7 @@ class ConcordanceVis extends React.Component {
     vis.height = this.props.height - vis.margin.top - vis.margin.bottom;
 
     // append SVG drawing area
-    vis.svg = d3.select("#test").append("svg")
-        .attr('id', 'concordanceSVG')
+    vis.svg = d3.select("#lineChart").append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
 
@@ -78,9 +77,9 @@ class ConcordanceVis extends React.Component {
 
   render() {
 
-    console.log('test', this.props)
+    console.log('lineChart', this.props)
     return (
-        <div id={'test'}>text</div>
+        <div id={'lineChart'}>text</div>
     );
   }
 }
