@@ -20,21 +20,10 @@ code {
     monospace;
 }
 
-/*FONTS*/
-
 h1 {
   text-align: center;
   margin: 0;
-  font-size: 1.5em;
 }
-
-h4 {
-  text-align: center;
-  margin: 0;
-  font-size: 1em;
-}
-
-/*CARDS*/
 
 .home-card, .all-card {
   border: thin solid grey;

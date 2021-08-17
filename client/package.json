@@ -52,8 +52,8 @@
     "build": "NODE_PATH=./src react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint-check": "prettier-eslint --list-different \"src/**/*.js\"",
-    "lint": "prettier-eslint --write \"src/**/*.js\""
+    "lint-check": "prettier-eslint --list-different \\\\\\\"old_orig_src/**/*.js\\\\\\\"",
+    "lint": "prettier-eslint --write \\\\\\\"old_orig_src/**/*.js\\\\\\\""
   },
   "keywords": [],
   "description": "Forked from https://github.com/tibotiber and thanks for what he did, add resize grid item functionality and more to do..."

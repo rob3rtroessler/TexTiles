@@ -6,8 +6,12 @@ import Tiles_HeadRowLeft from "../tiles/Tiles_HeadRowLeft";
 
 
 // chart containers
-import RobContainer from "./robContainer";
+import RobContainer from "../containers/robContainer";
 
+
+// prop types
+import PropTypes from "prop-types";
+const { string, object, func, arrayOf } = PropTypes;
 
 // grid layout
 import ReactGridLayout, { WidthProvider } from "react-grid-layout";
@@ -52,13 +56,20 @@ class Dashboard extends React.Component {
       };
   }
 
+  static propTypes = {
+    colors: object,
+    hover: arrayOf(string),
+    incrementRenderCount: func,
+    onLayoutChange: func
+  };
+
   componentDidMount() {
-   // this.props.incrementRenderCount("component");
+    this.props.incrementRenderCount("component");
     window.addEventListener("resize", this.onWindowResize);
   }
 
   componentDidUpdate(prevProps, prevState) {
-    //this.props.incrementRenderCount("component");
+    this.props.incrementRenderCount("component");
   }
 
   componentWillUnmount() {
@@ -69,6 +80,9 @@ class Dashboard extends React.Component {
     this.forceUpdate();
   };
 
+  onLayoutChange = layout => {
+    this.props.onLayoutChange(layout);
+  };
 
   render() {
       const { hover, colors } = this.props;
