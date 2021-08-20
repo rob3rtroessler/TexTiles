@@ -1,12 +1,10 @@
 // react
 import React from "react";
 
-// bootstrap?
-import Tiles_HeadRowLeft from "../tiles/Tiles_HeadRowLeft";
-
-
 // chart containers
-import RobContainer from "./robContainer";
+import RobContainer from "./tiles/robContainer";
+import Concordance from "./tiles/Concordance"
+import TopWords from "./tiles/TopWords";
 
 
 // grid layout
@@ -17,6 +15,10 @@ const dimensions = ["width", "height"];
 // withMeasure for resizing
 import withMeasure from "../hocs/withMeasure";
 const MeasuredRobContainer = withMeasure(dimensions)(RobContainer)
+const MeasuredConcordanceContainer = withMeasure(dimensions)(Concordance)
+
+// containers
+import SearchKeyWord from "./tiles/SearchKeyWord"
 
 // CSS
 import "react-grid-layout/css/styles.css";
@@ -39,16 +41,16 @@ class Dashboard extends React.Component {
 
               // FULL
               {i: 'FL', x: 0, y: 1, w: 2, h: 10, static: true},
-              {i: 'FR', x: 11, y: 1, w: 2, h: 5, static: true}, // logo & heading
+              {i: 'FR', x: 11, y: 1, w: 2, h: 4, static: true}, // logo & heading
 
               // TOP
-              { i: "TL", x: 2, y: 2, w: 4, h: 5 },
-              { i: "TR", x: 6, y: 2, w: 4, h: 5 },
+              { i: "TL", x: 2, y: 2, w: 5, h: 4 },
+              { i: "TR", x: 7, y: 2, w: 3, h: 4 },
 
               // BOTTOM
-              { i: "BL", x: 2, y: 3, w: 3, h: 5 },
-              { i: "BC", x: 5, y: 3, w: 3, h: 5 },
-              { i: "BR", x: 8, y: 3, w: 4, h: 5 }]
+              { i: "BL", x: 2, y: 3, w: 4, h: 6 },
+              { i: "BC", x: 6, y: 3, w: 4, h: 6 },
+              { i: "BR", x: 10, y: 3, w: 2, h: 6 }]
       };
   }
 
@@ -86,10 +88,10 @@ class Dashboard extends React.Component {
           >
               {/*TOP*/}
               <div key="header-left" className='home-card'>
-                  <Tiles_HeadRowLeft/>
+                  TexTiles
               </div>
               <div key="header-main" className='home-card'>
-                  center
+                  <SearchKeyWord/>
               </div>
               <div key="header-right" className='home-card'>
                   right
@@ -100,12 +102,12 @@ class Dashboard extends React.Component {
                   Text
               </div>
               <div key="FR" className='home-card'>
-                  Right
+                  <TopWords/>
               </div>
 
               {/*TOP*/}
               <div key="TL" className='home-card'>
-                  <MeasuredRobContainer />
+                  <MeasuredConcordanceContainer />
               </div>
               <div key="TR" className='home-card'>
                   <MeasuredRobContainer />

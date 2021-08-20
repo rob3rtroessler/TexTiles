@@ -111,3 +111,38 @@ h4 {
 .tile:hover {
   cursor: pointer
 }
+
+#concordance_parent {
+  height: 100%;
+  padding-bottom: 5px;
+}
+#concordance_container {
+  height: 100%;
+  background: transparent;
+  overflow-y: scroll;
+}
+
+#concordance_container::-webkit-scrollbar {
+  display: none;
+  margin: 0;
+  padding: 5px;
+}
+
+#top_words_container {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+#top_words_container::-webkit-scrollbar {
+  display: none;
+}
+
+.topWordsRow {
+  border-top: thin solid black;
+  text-align: center;
+}
+
+.twr-left {
+  text-align: right;
+  border-right: thin dotted black;
+}

@@ -58,6 +58,13 @@ fs.readFile('data/texts/Traumdeutung.txt', (err, data) => {
     console.log(helperArrayOfStemmedTokens);
 });
 
+app.get('/test', (req, res) => {
+    console.log('hit')
+    res.json({my: 'test'});
+})
+
+
+
 // route that computes concordances
 app.post('/api/getData', (req, res) => {
 
